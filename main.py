@@ -42,9 +42,9 @@ async def chat_endpoint(request: ChatRequest):
         
         full_messages = [system_instruction] + [msg.model_dump() for msg in request.messages]
 
-        # Standard Groq core model string
+        # Active Groq Developer tier model ID
         completion = groq_client.chat.completions.create(
-            model="llama3-8b-8192",
+            model="openai/gpt-oss-20b",
             messages=full_messages,
             temperature=0.7,
             max_tokens=1024
