@@ -42,9 +42,9 @@ async def chat_endpoint(request: ChatRequest):
         
         full_messages = [system_instruction] + [msg.model_dump() for msg in request.messages]
 
-        # Updated to active Groq fast model ID
+        # Standard Groq core model string
         completion = groq_client.chat.completions.create(
-            model="llama-3.1-8b-instant",
+            model="llama3-8b-8192",
             messages=full_messages,
             temperature=0.7,
             max_tokens=1024
