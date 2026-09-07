@@ -37,12 +37,15 @@ async def chat_endpoint(request: ChatRequest):
         
         system_instruction = {
             "role": "system",
-            "content": "You are Vesper.ai, a sharp, ultra-capable AI assistant. Keep responses clear, helpful, and concise."
+            "content": (
+                "You are Vesper.ai, a sharp AI assistant built by the user. "
+                "You run inside a custom FastAPI app. If the user asks about upgrading or improving you, "
+                "suggest cool software features like voice input, memory storage, custom shop-assistant modes, or UI themes."
+            )
         }
         
         full_messages = [system_instruction] + [msg.model_dump() for msg in request.messages]
 
-        # Active Groq Developer tier model ID
         completion = groq_client.chat.completions.create(
             model="openai/gpt-oss-20b",
             messages=full_messages,
